@@ -80,7 +80,7 @@ const show = () => {
             console.log("approve",approve);
             }
 
-
+            //sending tokens
             const response = await disperseSinger.disperseToken(address,wallet,value);
             console.log("response",response);
 

@@ -4,13 +4,18 @@ pragma solidity ^0.8.0;
 contract ContractFactory{
     mapping (address=>address) public ownertoContract;
     function createContract()public{
-        Sender newContract = new Sender();
+        Sender newContract = new Sender(msg.sender);
         ownertoContract[msg.sender] = address(newContract);
 
     }
 }
 
 contract Sender{
+    address public owner;
+
+    constructor (address _owner){
+        owner = _owner;
+    }
     
     mapping(address => mapping (address=> uint)) public PaymentDetails;
     
