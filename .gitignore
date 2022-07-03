@@ -1,0 +1,14 @@
+eth/node_modules
+eth/.env
+eth/coverage
+eth/coverage.json
+eth/typechain
+
+
+#Hardhat files
+eth/cache
+eth/artifacts
+eth/hardhat.config.js
+#Client
+client/node_modules
+client/.next
