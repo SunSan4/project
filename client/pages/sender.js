@@ -32,11 +32,13 @@ const sender = () => {
 
 
 
-    const wallets = AreaWA.split('\n');
+    const wallets = AreaWA.trim().split('\n');
+
     const wallet = [];
     const amount = [];
     const totaltokens = 0;
     const preTokens = 0;
+    const preWA = 0;
 
 
     const options = [
@@ -61,23 +63,25 @@ const sender = () => {
        try{
         const ch_allows = await ch_approve(adress);
         console.log("ch_allows",ch_allows);
-
-        if((AreaWA) || (totaltokens !== preTokens)){
+        //console.log("wallets",wallets);
+        if((AreaWA !== preWA) || (totaltokens !== preTokens)){
         wallets.forEach(w1 => {
-            const t1 = w1.split(' ');
+            const t1 = w1.replace("\t"," ").split(' ');
             const v1 = utils.parseEther(t1[1]);
             amount.push(v1.toString());
             totaltokens += Number(t1[1]);
 
         })
+        preWA = AreaWA;
         preTokens = totaltokens;
         console.log("preTokens",preTokens);
+        
         setInformMessage("TotalTokens for send :" + totaltokens);
        // setErrorMessage("");
     }
 
 
-       if(ch_allows <=0){
+       if(ch_allows <=preTokens){
 
        //reset error && active button
         
@@ -106,6 +110,8 @@ const sender = () => {
                     try {
                         const approve = await try_approve(TokenAddress, "999999999999999999".toString());
                         console.log("approve", approve);
+                        setSuccessMessage("hash:" + response.hash);
+                        if(setSuccessMessage){setCheckApprove(true);}
                     } catch (error) {
                         console.error(error);
                         setErrorMessage(error.message);
@@ -123,16 +129,10 @@ const sender = () => {
             setSuccessMessage("");
 
 
-
-
-
-
-
-
             try {
                 totaltokens = 0;
                 wallets.forEach(w1 => {
-                    const t1 = w1.split(' ');
+                    const t1 = w1.replace("\t"," ").split(' ');
                     const v1 = utils.parseEther(t1[1]);
     
                     wallet.push(t1[0]);
@@ -169,7 +169,8 @@ const sender = () => {
 
 
                 </Form.Group>
-                <Button loading={isLoading} primary>Send</Button>
+                {!CheckApprove ?<Button loading={isLoading} primary>Send</Button>:
+                <Button loading={isLoading}  disabled primary>Send</Button>}
 
                 {CheckApprove ? <Button loading={isLoading} primary type='submit' onClick={handApprove}>Approve</Button> :
                     <Button loading={isLoading} disabled type='submit' onClick={handApprove}>Approve</Button>}
