@@ -11,10 +11,8 @@ const Header = () => {
   const router = useRouter();
   
   async function login(){
-    const {ethereum} = window;
-    if(!ethereum) {
-      alert("install MM");
-              }
+
+              
               try{
               const accounts = await ethereum.request({method: "eth_requestAccounts"});
               setCurrentAccount(accounts[0]);
@@ -26,6 +24,7 @@ const Header = () => {
               }
           
   };
+  
 
   if(!currentAccount){
     login();
@@ -33,11 +32,7 @@ const Header = () => {
 
   const hanleLogInClick = async () =>{
     
-  
- 
-  
-
-  }
+    }
 
     return ( 
         <Segment inverted>
