@@ -132,7 +132,7 @@ const sender = () => {
             try {
                 totaltokens = 0;
                 wallets.forEach(w1 => {
-                    const t1 = w1.replace("\t"," ").split(' ');
+                    const t1 = w1.replace("\t;,: "," ").split(' ');
                     const v1 = utils.parseEther(t1[1]);
     
                     wallet.push(t1[0]);
