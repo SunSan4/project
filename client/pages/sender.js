@@ -25,13 +25,14 @@ const sender = () => {
     const TokenAddress = Token;
     const preTokenA = "";
     
+    
 
     const singer = provider.getSigner();
     const SenderSinger = disperse.connect(singer);
 
 
 
-
+    
     const wallets = AreaWA.trim().split('\n');
 
     const wallet = [];
@@ -48,9 +49,11 @@ const sender = () => {
     ]
     
  
-    if (preTokenA != TokenAddress  ) {
+    if (TokenAddress !== preTokenA ) {
         
         checkers(TokenAddress);
+        console.log("preTokenA",preTokenA);
+        console.log("TokenAddress",TokenAddress);
         
     }
   
@@ -58,18 +61,23 @@ const sender = () => {
     async function checkers(adress) {
 
         preTokenA = adress;
+        
 
 
        try{
         const ch_allows = await ch_approve(adress);
         console.log("ch_allows",ch_allows);
         //console.log("wallets",wallets);
-        if((AreaWA !== preWA) || (totaltokens !== preTokens)){
-        wallets.forEach(w1 => {
-            const t1 = w1.replace("\t"," ").split(' ');
+        
+        if((AreaWA && AreaWA !== preWA)){
+            wallets.forEach(w1 => {
+            
+            const t1 = w1.replace(/['\t':,]/g," ").split(" ");
+            console.log("t1",t1);
             const v1 = utils.parseEther(t1[1]);
             amount.push(v1.toString());
             totaltokens += Number(t1[1]);
+            
 
         })
         preWA = AreaWA;
@@ -78,7 +86,7 @@ const sender = () => {
         
         setInformMessage("TotalTokens for send :" + totaltokens);
        // setErrorMessage("");
-    }
+            }
 
 
        if(ch_allows <=preTokens){
@@ -92,6 +100,7 @@ const sender = () => {
                 console.error(error);
                  setErrorMessage("проверь адрес токена  -  Ошибка :" + error.message);
                  setCheckApprove(false);
+                 
            }
       
 
