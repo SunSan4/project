@@ -1,9 +1,10 @@
 import { utils } from "ethers";
 import { useState } from "react";
-import { Button, Form, Input, Message, Select, TextArea } from "semantic-ui-react";
+import { Button, Checkbox, Form, Input, Message, Select, TextArea } from "semantic-ui-react";
 import Layout from "../components/Layout";
 import disperse from "../disperse";
 import provider from "../provider";
+import SendList from "../utils/ArraySendList";
 import ch_approve from "../utils/ch_approve";
 import try_approve from "../utils/try_approve";
 
@@ -13,6 +14,7 @@ const sender = () => {
     const [Token, setToken] = useState("");
     const [AreaWA, setAreaWA] = useState("");
    // const [stoper,setStoper] = useState(0);
+    const [Chbox,SetChbox] = useState(false);
 
 
 
@@ -54,14 +56,19 @@ const sender = () => {
         checkers(TokenAddress);
         console.log("preTokenA",preTokenA);
         console.log("TokenAddress",TokenAddress);
+        //console.log("Chbox",Chbox);
         
     }
   
 
+
+
+
     async function checkers(adress) {
 
         preTokenA = adress;
-        
+
+            
 
 
        try{
@@ -70,21 +77,13 @@ const sender = () => {
         //console.log("wallets",wallets);
         
         if((AreaWA && AreaWA !== preWA)){
-            wallets.forEach(w1 => {
-            
-            const t1 = w1.replace(/['\t':,]/g," ").split(" ");
-            console.log("t1",t1);
-            const v1 = utils.parseEther(t1[1]);
-            amount.push(v1.toString());
-            totaltokens += Number(t1[1]);
-            
+            const List = await SendList(AreaWA);
 
-        })
         preWA = AreaWA;
-        preTokens = totaltokens;
+        preTokens = List.TotalTokes;
         console.log("preTokens",preTokens);
         
-        setInformMessage("TotalTokens for send :" + totaltokens);
+        setInformMessage("TotalTokens for send :" + List.TotalTokes);
        // setErrorMessage("");
             }
 
@@ -117,10 +116,26 @@ const sender = () => {
             setSuccessMessage("");
 
                     try {
-                        const approve = await try_approve(TokenAddress, "999999999999999999".toString());
-                        console.log("approve", approve);
+                        const List = await SendList(AreaWA);
+                        
+                        const tok = 0;
+                        if(Chbox){
+                            //tok = "999999999999999999".toString();
+                            tok = "999999999999999999";
+                        }
+                        else{
+
+                           // tok = utils.parseEther(List.TotalTokes).toString();
+                           tok =List.TotalTokes.toString();
+                            
+                        }
+                        console.log("tok",tok);
+                        const approve = await try_approve(TokenAddress,tok);
+                        
                         setSuccessMessage("hash:" + response.hash);
                         if(setSuccessMessage){setCheckApprove(true);}
+                        console.log("approve", approve);
+                        
                     } catch (error) {
                         console.error(error);
                         setErrorMessage(error.message);
@@ -139,20 +154,11 @@ const sender = () => {
 
 
             try {
-                totaltokens = 0;
-                wallets.forEach(w1 => {
-                    const t1 = w1.replace("\t;,: "," ").split(' ');
-                    const v1 = utils.parseEther(t1[1]);
-    
-                    wallet.push(t1[0]);
-                    amount.push(v1.toString());
-                    totaltokens += parseInt(t1[1]);
-    
-                    //console.log("v1",amount + TokenAddress);
-    
-                });
+                
+                const List = await SendList(AreaWA);
 
-                const response = await SenderSinger.disperseToken(TokenAddress, wallet, amount);
+
+                const response = await SenderSinger.disperseToken(TokenAddress, List.wallet, List.value);
                 setSuccessMessage("hash:" + response.hash);
             }
             catch (error) {
@@ -178,6 +184,7 @@ const sender = () => {
 
 
                 </Form.Group>
+                <Form.Checkbox label='Unlimitted_Approve' control={Checkbox} checked={Chbox?true:false} onChange={() =>SetChbox(!Chbox)}/>
                 {!CheckApprove ?<Button loading={isLoading} primary>Send</Button>:
                 <Button loading={isLoading}  disabled primary>Send</Button>}
 
