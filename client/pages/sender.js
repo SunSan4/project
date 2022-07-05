@@ -54,8 +54,8 @@ const sender = () => {
     if (TokenAddress !== preTokenA ) {
         
         checkers(TokenAddress);
-        console.log("preTokenA",preTokenA);
-        console.log("TokenAddress",TokenAddress);
+      //  console.log("preTokenA",preTokenA);
+       // console.log("TokenAddress",TokenAddress);
         //console.log("Chbox",Chbox);
         
         
@@ -92,7 +92,7 @@ const sender = () => {
             }
 
 
-       if(ch_allows <=preTokens){
+       if(ch_allows <preTokens){
 
        //reset error && active button
         
@@ -135,12 +135,12 @@ const sender = () => {
                            tok =List.TotalTokes.toString();
                             
                         }
-                        console.log("tok",tok);
+                      //  console.log("tok",tok);
                         const approve = await try_approve(TokenAddress,tok);
                         
-                        setSuccessMessage("hash:" + response.hash);
+                        setSuccessMessage("hash: " + approve.response.hash);
                         if(setSuccessMessage){setCheckApprove(true);}
-                        console.log("approve", approve);
+                       // console.log("approve", approve);
                         
                     } catch (error) {
                         console.error(error);
@@ -165,7 +165,8 @@ const sender = () => {
 
 
                 const response = await SenderSinger.disperseToken(TokenAddress, List.wallet, List.value);
-                setSuccessMessage("hash:" + response.hash);
+                
+                setSuccessMessage("hash: " + response);
             }
             catch (error) {
                 console.error(error);
