@@ -58,6 +58,7 @@ const sender = () => {
         console.log("TokenAddress",TokenAddress);
         //console.log("Chbox",Chbox);
         
+        
     }
   
 
@@ -72,6 +73,9 @@ const sender = () => {
 
 
        try{
+        //if unlim
+        if(Chbox && CheckApprove){setCheckApprove(false)};
+
         const ch_allows = await ch_approve(adress);
         console.log("ch_allows",ch_allows);
         //console.log("wallets",wallets);
@@ -92,8 +96,10 @@ const sender = () => {
 
        //reset error && active button
         
-        setCheckApprove(true);
-       }   }     
+        setCheckApprove(false);
+       }else{setCheckApprove(true);} 
+        
+    }     
            catch (error) {
                 setErrorMessage("");     
                 console.error(error);
@@ -184,11 +190,11 @@ const sender = () => {
 
 
                 </Form.Group>
-                <Form.Checkbox label='Unlimitted_Approve' control={Checkbox} checked={Chbox?true:false} onChange={() =>SetChbox(!Chbox)}/>
-                {!CheckApprove ?<Button loading={isLoading} primary>Send</Button>:
+                <Form.Checkbox label='Unlimitted Approve' control={Checkbox} checked={Chbox?true:false} onChange={() =>SetChbox(!Chbox)}/>
+                {CheckApprove ?<Button loading={isLoading} primary>Send</Button>:
                 <Button loading={isLoading}  disabled primary>Send</Button>}
 
-                {CheckApprove ? <Button loading={isLoading} primary type='submit' onClick={handApprove}>Approve</Button> :
+                {!CheckApprove ? <Button loading={isLoading} primary type='submit' onClick={handApprove}>Approve</Button> :
                     <Button loading={isLoading} disabled type='submit' onClick={handApprove}>Approve</Button>}
 
                 <Message style={{ wordBreak: 'break-word' }} error header='Error:' content={erroMessage} />
