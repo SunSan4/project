@@ -180,7 +180,7 @@ const sender = () => {
                 <Form.Group widths='equal'>
                     <Form.Field control={Input} label='Token' value={Token} placeholder='0x...' onChange={event => setToken(event.target.value)} />
 
-                    <Form.Field control={TextArea} label="Walets Tokens" value={AreaWA} placeholder='Walets Tokens' onChange={event => setAreaWA(event.target.value)} />
+                    <Form.Field control={TextArea} label="Wallets Tokens" value={AreaWA} placeholder='Wallets Tokens' onChange={event => setAreaWA(event.target.value)} />
 
 
                 </Form.Group>
