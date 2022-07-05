@@ -28,7 +28,7 @@ const Index = () => {
 
     return ( <Layout>
         
-        <Button.Group>
+        {/* <Button.Group>
   
         {!currentAccount?
         <Button primary onClick={hanleLogInClick}>Connect</Button>:
@@ -50,7 +50,7 @@ const Index = () => {
             <Button primary onClick={hanleLogInClick}>{currentAccount}</Button>
             </Link>}
             
-        </Button.Group>
+        </Button.Group> */}
         </Layout>
     
     
