@@ -6,7 +6,7 @@ const SendList =  (Array) => {
     const wallets = Array.trim().split('\n');
     const wallet = [];
     const value = [];
-    const TotalTokes = 0;
+    const TotalTokens = 0;
     const TextRender = "";
 
     wallets.forEach(w1 => {
@@ -17,13 +17,13 @@ const SendList =  (Array) => {
         wallet.push(t1[0]);
         value.push(v1.toString());
        
-        TotalTokes += Number(t1[1]);
-        TextRender += t1[0]+"----------------"+t1[1]+" ";
+        TotalTokens += Number(t1[1]);
+        TextRender += t1[0]+">>>>>>>>>>"+t1[1]+" ";
 
     });
 
     
-    return {wallet,value,TotalTokes,TextRender};
+    return {wallet,value,TotalTokens,TextRender};
     }
 }
  
