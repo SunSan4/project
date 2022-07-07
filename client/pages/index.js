@@ -1,8 +1,7 @@
-import { allowedStatusCodes } from "next/dist/lib/load-custom-routes";
-import Link from "next/link";
+
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { Button, Checkbox, Form, GridRow, Input, Menu, Message, TextArea } from "semantic-ui-react";
+import { useEffect, useState } from "react";
+import { Button, Checkbox, Form, Input, Message, TextArea } from "semantic-ui-react";
 import Layout from "../components/Layout";
 import SendList from "../utils/ArraySendList";
 import read_checktoken from "../utils/read_checktoken";
@@ -25,17 +24,22 @@ const Index = () => {
   const [infoMessage, setInfoMessage] = useState("");
   const [isLoading, setisLoading] = useState(false);
   const [ConfirmationList, setConfirmationList] = useState("");
+  const [Remaining,setRemaining] = useState("");
 
 
 //list array
   useEffect(() => {
     if (arrayWA != "") {
+      setErrorMessage("");
+      
       try{
       setConfirmationList(SendList(arrayWA));
       }
       catch (error) {
-        console.error(error);
+      //  console.error(error);
         setErrorMessage(error.message);
+        setConfirmationList("");
+        setRemaining("");
       }
     }
   }, [arrayWA]);
@@ -43,16 +47,19 @@ const Index = () => {
 //info token
   useEffect(() => {
     if (tokenAddress != "") {
+      setErrorMessage("");
 
      
         const fetchData = async () => {
           try {
           const resp = await read_checktoken(tokenAddress);
           setInfoMessage(resp);
-          setErrorMessage("");
+
+                   
+          
           }
           catch (error) {
-            console.error(error);
+           // console.error(error);
             setErrorMessage(error.message);
             setInfoMessage("");
           }
@@ -61,31 +68,13 @@ const Index = () => {
         fetchData();
      }
   }, [tokenAddress]);
-
-
-  async function checkers() {
-
-  }
-
-
-  const router = useRouter();
-
-  const [currentAccount, setCurrentAccount] = useState();
-  const hanleLogInClick = async () => {
-
-
-
-    try {
-
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-      setCurrentAccount(accounts[0]);
-
+// take remaining
+  useEffect(() => {
+    if(ConfirmationList && infoMessage){
+    setRemaining(infoMessage.BalanceOf-ConfirmationList.TotalTokens);
     }
-    catch (error) {
-      console.error(error);
+  },[ConfirmationList,infoMessage]);
 
-    }
-  }
 
   return (<Layout>
 
@@ -138,11 +127,11 @@ const Index = () => {
           <Message color="olive" size="big" >
             <Message.Header>Info:</Message.Header>
 
-            <br />Name: {infoMessage.Name}
-            <br />Symbol: {infoMessage.Sym}
+            <br />Name: <b style = {{color:"black"}}>{infoMessage.Name}</b>
+            <br />Symbol: <b style = {{color:"black"}}>{infoMessage.Sym}</b>
             <br />
-            <br />Разрешено для отправки: {infoMessage.Allow}
-            <br />Токенов в кошельке: {infoMessage.BalanceOf}
+            <br />Разрешено для отправки: <b style = {{color:"black"}}>{infoMessage.Allow}</b>
+            <br />Токенов в кошельке: <b style = {{color:"black"}}>{infoMessage.BalanceOf}</b>
             <br /><p>0xa34ddb7393706CB3C8c4232839DCc033ECFbD0a5</p>
 
 
@@ -152,8 +141,8 @@ const Index = () => {
         <Form.Field>
           <Message color="yellow" size="big" >
             <Message.Header>Confirmation List: </Message.Header>
-            <p>TotalTokes for Send:<b> {ConfirmationList.TotalTokes}</b></p>
-            <p>remaining {Number(ConfirmationList.TotalTokes) - Number(ConfirmationList.BalanceOf)}</p>
+            <p>Токенов на отправку : <b style = {{color:"black"}}> {ConfirmationList.TotalTokens}</b></p>
+            <p>Остаток после отправки: <b style = {{color:"black"}}>{Remaining}</b> </p>
             <p>{ConfirmationList.TextRender}
             </p>
           </Message>
