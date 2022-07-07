@@ -1,8 +1,9 @@
-import { Button, Menu, Segment } from "semantic-ui-react";
+import { Button, Menu, Segment, SegmentGroup } from "semantic-ui-react";
 import Link from "next/link";
 import MenuExampleInvertedSecondary from "./menu";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Layout from "./Layout";
 
 
 const Header = () => {
@@ -35,17 +36,16 @@ const Header = () => {
     }
 
     return ( 
-        <Segment inverted>
-          {/* убрать ошикбу 404 favicon */}
-          <link rel="icon" href="data:;base64,="/>
-
-      
-                   
-                 
-      <Menu.Item position='left'>
+      <Segment inverted>
+               <Menu  inverted>  
+      <Menu floated="right" inverted>
+                  {/* убрать ошикбу 404 favicon */}
+                  <link rel="icon" href="data:;base64,="/>
+                  
+      <Menu.Item >
             {!currentAccount?<Button primary onClick={hanleLogInClick}>Connect</Button>:
             
-            <Button primary >{currentAccount}</Button>
+            <Button primary>{currentAccount}</Button>
             }
             {!currentAccount?<Button loading >Connect</Button>:
             
@@ -54,7 +54,11 @@ const Header = () => {
         
 
            </Menu.Item>
-      </Segment>
+           </Menu>
+           </Menu>
+           </Segment>
+           
+
       );
 }
  

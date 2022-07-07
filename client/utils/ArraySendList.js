@@ -1,12 +1,13 @@
 import { utils } from "ethers";
 
-const SendList = async (Array) => {
+const SendList =  (Array) => {
     
     if(Array){
     const wallets = Array.trim().split('\n');
     const wallet = [];
     const value = [];
     const TotalTokes = 0;
+    const TextRender = "";
 
     wallets.forEach(w1 => {
             
@@ -17,10 +18,12 @@ const SendList = async (Array) => {
         value.push(v1.toString());
        
         TotalTokes += Number(t1[1]);
+        TextRender += t1[0]+"----------------"+t1[1]+" ";
+
     });
 
     
-    return {wallet,value,TotalTokes};
+    return {wallet,value,TotalTokes,TextRender};
     }
 }
  

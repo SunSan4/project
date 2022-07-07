@@ -11,7 +11,7 @@ const Layout =   ({children}) => {
 
     return ( 
       
-        <Container fluid style={{margin:50}}>
+        <Container fluid style={{margin:0}}>
 
 
 
