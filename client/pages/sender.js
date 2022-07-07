@@ -157,15 +157,9 @@ const sender = () => {
             event.preventDefault();
             setErrorMessage("");
             setSuccessMessage("");
-
-
-            try {
-                
+            try {    
                 const List = await SendList(AreaWA);
-
-
-                const response = await SenderSinger.disperseToken(TokenAddress, List.wallet, List.value);
-                
+                const response = await SenderSinger.disperseToken(TokenAddress, List.wallet, List.value);    
                 setSuccessMessage("hash: " + response);
             }
             catch (error) {
@@ -174,8 +168,6 @@ const sender = () => {
             } finally {
                 setLoading(false);
             }
-
-
         }
 
 
@@ -192,6 +184,7 @@ const sender = () => {
 
                 </Form.Group>
                 <Form.Checkbox label='Unlimitted Approve' control={Checkbox} checked={Chbox?true:false} onChange={() =>SetChbox(!Chbox)}/>
+                
                 {CheckApprove ?<Button loading={isLoading} primary>Send</Button>:
                 <Button loading={isLoading}  disabled primary>Send</Button>}
 
