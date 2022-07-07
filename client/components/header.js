@@ -47,10 +47,10 @@ const Header = () => {
             
             <Button primary>{currentAccount}</Button>
             }
-            {!currentAccount?<Button loading >Connect</Button>:
+            {/* {!currentAccount?<Button loading >Connect</Button>:
             
             <Button positive onClick={()=>router.push("/sender")}>Sender</Button>
-            }
+            } */}
         
 
            </Menu.Item>

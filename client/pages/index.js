@@ -27,22 +27,6 @@ const Index = () => {
   const [ConfirmationList, setConfirmationList] = useState("");
 
 
-
-  const pretokenAddress = "";
-  const prearrayWA = "";
-  if (tokenAddress != pretokenAddress && tokenAddress != "") {
-    if (!tokenAddress) { setInfoMessage(""); }
-    console.log("pretokenAddress", pretokenAddress);
-    console.log("tokenAddress", tokenAddress)
-    pretokenAddress = tokenAddress;
-
-
-    //infos(tokenAddress);
-
-
-  }
-  //const preConf = "";
-
 //list array
   useEffect(() => {
     if (arrayWA != "") {
@@ -75,32 +59,10 @@ const Index = () => {
     
         }
         fetchData();
-      
-
-
-
-
-      
-    }
+     }
   }, [tokenAddress]);
 
 
-  //function about token-info
-  async function infos(address) {
-
-    try {
-      const resp = await read_checktoken(address);
-      //console.log("resp",resp); 
-      if (!infoMessage) {
-        setInfoMessage(resp);
-        // console.log("infoMessage",infoMessage);
-      }
-    }
-    catch (error) {
-      console.error(error);
-      setErrorMessage(error.message);
-    }
-  }
   async function checkers() {
 
   }
