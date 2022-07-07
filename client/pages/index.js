@@ -5,6 +5,9 @@ import { Button, Checkbox, Form, Input, Message, TextArea } from "semantic-ui-re
 import Layout from "../components/Layout";
 import SendList from "../utils/ArraySendList";
 import read_checktoken from "../utils/read_checktoken";
+import disperse from "../disperse";
+import provider from "../provider";
+import try_approve from "../utils/try_approve";
 
 
 
@@ -15,7 +18,8 @@ const Index = () => {
   const [chboxRevoke, setchboxRevoke] = useState(false);
 
 
-
+  const singer = provider.getSigner();
+  const SenderSinger = disperse.connect(singer);
 
 
   // state
@@ -76,6 +80,51 @@ const Index = () => {
   },[ConfirmationList,infoMessage]);
 
 
+//approving
+const handApprove = async (event) => {
+  event.preventDefault();
+  setErrorMessage("");
+  setSuccessMessage("");
+
+          try {
+              const List = SendList(arrayWA);
+              const toks = 0;
+              if(Chbox){
+                  toks = "999999999999999999";
+              }
+              else{
+                 toks = List.TotalTokens.toString();    
+              }
+              const approve = await try_approve(tokenAddress,toks); 
+              setSuccessMessage("hash: " + approve.response.hash);
+              if(setSuccessMessage){setcheckApprove(true);}
+
+          } catch (error) {
+             // console.error(error);
+              setErrorMessage(error.message);
+          } finally {
+              setisLoading(false);
+          }
+}
+
+  //send dispers
+const handleSublit = async (event) => {
+  event.preventDefault();
+  setErrorMessage("");
+  setSuccessMessage("");
+  try {    
+      const List = SendList(arrayWA);
+      const response = await SenderSinger.disperseToken(tokenAddress, List.wallet, List.value);    
+      setSuccessMessage("hash: " + response);
+  }
+  catch (error) {
+      console.error(error);
+      setErrorMessage(error.message);
+  } finally {
+    setisLoading(false);
+  }
+}
+
   return (<Layout>
 
     {/* <Button.Group>
@@ -112,9 +161,9 @@ const Index = () => {
 
 
       <Form.Group >
-        <Form.Field control={Button}>Send</Form.Field>
+        <Form.Field control={Button} onClick={handleSublit} loading={isLoading} >Send</Form.Field>
 
-        {!chboxRevoke ? <Form.Field control={Button}>Approve</Form.Field> :
+        {!chboxRevoke ? <Form.Field onClick={handApprove} control={Button} loading={isLoading} >Approve</Form.Field> :
           <Form.Field control={Button}>Revoke</Form.Field>}
 
         <Form.Checkbox control={Checkbox} label="Revoke" checked={chboxRevoke ? true : false} onChange={() => setchboxRevoke(!chboxRevoke)} />
