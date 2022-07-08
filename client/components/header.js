@@ -12,7 +12,23 @@ const Header = () => {
   const [currentAccount,setCurrentAccount] = useState();
   const [currentNetwork,setcurrentNetwork] = useState("");
   const router = useRouter();
-  
+
+
+  async function login(){      
+    try{
+    const accounts = await ethereum.request({method: "eth_requestAccounts"});
+    const network = await provider.getNetwork();
+    setCurrentAccount(accounts[0]);
+    setcurrentNetwork(network);
+    }
+    catch(error)
+    {
+  console.error(error);
+    }
+};
+if(!currentAccount){
+login();
+}
 
   const hanleLogInClick = async () =>{
     try{
