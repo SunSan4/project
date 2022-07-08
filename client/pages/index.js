@@ -12,7 +12,7 @@ import try_approve from "../utils/try_approve";
 
 
 const Index = () => {
-  const [checkApprove, setcheckApprove] = useState(false);
+  const [checkApprove, setcheckApprove] = useState(true);
   const [tokenAddress, settokenAddress] = useState("");
   const [arrayWA, setarrayWA] = useState("");
   const [chboxRevoke, setchboxRevoke] = useState(false);
@@ -20,7 +20,7 @@ const Index = () => {
 
   const singer = provider.getSigner();
   const SenderSinger = disperse.connect(singer);
-
+ // const [, forceRender] = useState({});
 
   // state
   const [errorMessage, setErrorMessage] = useState("");
@@ -35,9 +35,10 @@ const Index = () => {
   useEffect(() => {
     if (arrayWA != "") {
       setErrorMessage("");
-      
       try{
       setConfirmationList(SendList(arrayWA));
+
+
       }
       catch (error) {
       //  console.error(error);
@@ -46,38 +47,49 @@ const Index = () => {
         setRemaining("");
       }
     }
+    console.log("count array");
   }, [arrayWA]);
+
 
 //info token
   useEffect(() => {
     if (tokenAddress != "") {
       setErrorMessage("");
-
-     
         const fetchData = async () => {
           try {
           const resp = await read_checktoken(tokenAddress);
           setInfoMessage(resp);
+       //   console.log("infoMessage.Allow",infoMessage.Allow);
+       //   if(infoMessage.Allow>0){setcheckApprove(false);
+       //     console.log("set>0");
+       //   }
+         // else{setcheckApprove(true)};
+         
+        }
 
-                   
-          
-          }
           catch (error) {
            // console.error(error);
             setErrorMessage(error.message);
             setInfoMessage("");
           }
-    
         }
         fetchData();
      }
-  }, [tokenAddress]);
+     console.log("count tok");
+  }, [tokenAddress,checkApprove]);
+
+
 // take remaining
   useEffect(() => {
     if(ConfirmationList && infoMessage){
     setRemaining(infoMessage.BalanceOf-ConfirmationList.TotalTokens);
-    }
-  },[ConfirmationList,infoMessage]);
+
+    if(infoMessage.Allow>=ConfirmationList.TotalTokens){setcheckApprove(false);
+      
+    }else{setcheckApprove(true);};
+  }
+    console.log("count rem");
+  },[ConfirmationList,infoMessage,checkApprove]);
 
 
 //approving
@@ -89,15 +101,24 @@ const handApprove = async (event) => {
           try {
               const List = SendList(arrayWA);
               const toks = 0;
-              if(Chbox){
-                  toks = "999999999999999999";
+              if(!chboxRevoke){
+                 toks = "99999999999999999999999999";
+                 const approve = await try_approve(tokenAddress,toks); 
+                 setSuccessMessage("hash: " + approve.response.hash);
+                 const Confirmation = await provider.waitForTransaction(approve.response.hash, 1);
+                 if(Confirmation){setcheckApprove(false);}
+               
               }
               else{
-                 toks = List.TotalTokens.toString();    
+                 toks = "0";
+                // toks = List.TotalTokens.toString();    
+                const approve = await try_approve(tokenAddress,toks); 
+                setSuccessMessage("hash: " + approve.response.hash);
+                const Confirmation = await provider.waitForTransaction(approve.response.hash, 1);
+                if(Confirmation){setcheckApprove(true);}
               }
-              const approve = await try_approve(tokenAddress,toks); 
-              setSuccessMessage("hash: " + approve.response.hash);
-              if(setSuccessMessage){setcheckApprove(true);}
+
+
 
           } catch (error) {
              // console.error(error);
@@ -105,6 +126,7 @@ const handApprove = async (event) => {
           } finally {
               setisLoading(false);
           }
+          
 }
 
   //send dispers
@@ -114,8 +136,15 @@ const handleSublit = async (event) => {
   setSuccessMessage("");
   try {    
       const List = SendList(arrayWA);
-      const response = await SenderSinger.disperseToken(tokenAddress, List.wallet, List.value);    
-      setSuccessMessage("hash: " + response);
+      const response = await SenderSinger.disperseToken(tokenAddress, List.wallet, List.value); 
+      
+     // const approve = await try_approve(tokenAddress,toks); 
+
+      setSuccessMessage("hash: " + response.hash);
+      const Confirmation = await provider.waitForTransaction(response.hash, 1);
+      console.log("confirm",Confirmation);
+
+      
   }
   catch (error) {
       console.error(error);
@@ -123,6 +152,7 @@ const handleSublit = async (event) => {
   } finally {
     setisLoading(false);
   }
+  
 }
 
   return (<Layout>
@@ -161,10 +191,11 @@ const handleSublit = async (event) => {
 
 
       <Form.Group >
-        <Form.Field control={Button} onClick={handleSublit} loading={isLoading} >Send</Form.Field>
+      {!checkApprove?<Form.Field control={Button} onClick={handleSublit} loading={isLoading} >Send</Form.Field>:
+      <Form.Field control={Button} onClick={handleSublit} loading={isLoading} disabled>Send</Form.Field>}
 
         {!chboxRevoke ? <Form.Field onClick={handApprove} control={Button} loading={isLoading} >Approve</Form.Field> :
-          <Form.Field control={Button}>Revoke</Form.Field>}
+          <Form.Field control={Button} onClick={handApprove} loading={isLoading} >Revoke</Form.Field>}
 
         <Form.Checkbox control={Checkbox} label="Revoke" checked={chboxRevoke ? true : false} onChange={() => setchboxRevoke(!chboxRevoke)} />
       </Form.Group>

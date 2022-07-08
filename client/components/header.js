@@ -12,7 +12,7 @@ const Header = () => {
   const [currentAccount,setCurrentAccount] = useState();
   const [currentNetwork,setcurrentNetwork] = useState("");
   const router = useRouter();
- 
+  
 
   const hanleLogInClick = async () =>{
     try{
@@ -21,7 +21,7 @@ const Header = () => {
       const network = await provider.getNetwork(); 
       
       setcurrentNetwork(network);
-      console.log("network",network);
+     // console.log("network",network);
       }
       catch(error)
       {

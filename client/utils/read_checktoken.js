@@ -20,11 +20,13 @@ const read_checktoken = async(address) => {
     BalanceOf = await contract.balanceOf(accounts[0]);
     TotalSup = await contract.totalSupply();
     Allow = ethers.utils.formatEther(Allow);
+    Allow = Number(Allow);
     BalanceOf = ethers.utils.formatEther(BalanceOf);
     TotalSup = ethers.utils.formatEther(TotalSup);
     Name = await contract.name();
     //console.log("contract.functions",contract.functions)
     Sym = await contract.symbol();
+    
 
     
     return {Allow,BalanceOf,TotalSup,Name,Sym};
