@@ -7,7 +7,7 @@ async function main() {
   const [deployer] = await ethers.getSigner();
   console.log ("Deployer contract = ",deployer.address);
 
-  const Disperse = await hre.ethers.getContractFactory("Disperse");
+  const Disperse = await ethers.getContractFactory("Disperse");
   const disperse = await Disperse.deploy();
 
   await disperse.deployed();

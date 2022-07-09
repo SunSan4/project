@@ -11,7 +11,7 @@ import try_approve from "../utils/try_approve";
 
 
 
-const Index = () => {
+const SimSender = () => {
   const [checkApprove, setcheckApprove] = useState(true);
   const [tokenAddress, settokenAddress] = useState("");
   const [arrayWA, setarrayWA] = useState("");
@@ -136,13 +136,13 @@ const handleSublit = async (event) => {
   setSuccessMessage("");
   try {    
       const List = SendList(arrayWA);
-      const response = await SenderSinger.disperseToken(tokenAddress, List.wallet, List.value); 
+      const response = await SenderSinger.disperseTokenSimple(tokenAddress, List.wallet, List.value); 
       
      // const approve = await try_approve(tokenAddress,toks); 
 
       setSuccessMessage("hash: " + response.hash);
       const Confirmation = await provider.waitForTransaction(response.hash, 1);
-      //setSuccessMessage("Confirmed" + Confirmation);
+      console.log("confirm",Confirmation);
 
       
   }
@@ -158,11 +158,7 @@ const handleSublit = async (event) => {
   return (
   
   <Layout>
-            <div>    <Button.Group basic vertical>
-      <Button>BUSD</Button>
-      <Button>USDT</Button>
-      <Button>USDC</Button>
-    </Button.Group></div>
+            <div>   Simple Sender</div>
 
     {/* <Button.Group>
   
@@ -221,8 +217,6 @@ const handleSublit = async (event) => {
             <br />Разрешено для отправки: <b style = {{color:"black"}}>{infoMessage.Allow}</b>
             <br />Токенов в кошельке: <b style = {{color:"black"}}>{infoMessage.BalanceOf}</b>
             <br /><p>0xa34ddb7393706CB3C8c4232839DCc033ECFbD0a5</p>
-            <br /><p>Disp: </p>
-            <br /><p>0x0E1eaD5e2C7D321351163817d53524073B4A6127</p>
 
 
           </Message>
@@ -253,4 +247,4 @@ const handleSublit = async (event) => {
   );
 }
 
-export default Index;
+export default SimSender;

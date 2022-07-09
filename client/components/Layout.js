@@ -19,7 +19,7 @@ const Layout =   ({children}) => {
            
 
             
-          <Segment inverted tertiary style={{margin:100}}>
+          <Segment inverted tertiary style={{margin:40}}>
           
     {children}
     

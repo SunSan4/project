@@ -3,6 +3,7 @@ eth/.env
 eth/coverage
 eth/coverage.json
 eth/typechain
+eth
 
 
 #Hardhat files
