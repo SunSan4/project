@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Layout from "./Layout";
 import provider from "../provider";
 import disperse from "../disperse";
+import { ethers } from "ethers";
 
 
 const Header = () => {
@@ -17,80 +18,112 @@ const Header = () => {
   const [butclr,setbutclr] = useState("black");
 
 useEffect(()=>{
-  //if(!currentAccount){
-    login();
-   // }
-
-  async function login(){   
-      
+  if(!currentAccount){
+    login;
+      }
+   ethereum.on('chainChanged', (_chainId) => window.location.reload()); 
+  
+  
+   
+   const login = async()=>{ 
+    //setCurrentAccount("");
+    //setcurrentNetwork("");
     try{
     const accounts = await ethereum.request({method: "eth_requestAccounts"});
-    const network = await provider.getNetwork();
-    const ownerdisperse = await disperse.owner();
     accounts[0] = accounts[0].toUpperCase();
+    const network = await provider.getNetwork();
+    
+    setcurrentNetwork(network);
+    const ownerdisperse = await disperse.owner();
     ownerdisperse = ownerdisperse.toUpperCase();
     setCurrentAccount(accounts[0]);
-    setcurrentNetwork(network);
     if(currentAccount == ownerdisperse){
     setcurrentOwnerDisperse(true);}
     else{setcurrentOwnerDisperse(false); }
-console.log("network.chainId",network.chainId);
-    switch (network.chainId) {
- 
-      case 1://eth
-      setbutclr("grey")
-        break;
-      case 4: //rinkeby
-      setbutclr("black")
-        break;
-      case 56: //bnb
-      setbutclr("yellow")
-        break;
-      case 43114: //avax
-      setbutclr("red")
-        break;
-      case 137: //matic
-      setbutclr("purple")
-        break;
-      case 250: //fantom
-      setbutclr("blue")
-        break;
-      case 42161: //arbitrum
-      setbutclr("violet")
-        break;
-      case 10: //optimism
-      setbutclr("red")
-        break;
-      case 1284: //Moonbeam
-      setbutclr("teal")
-        break;
-      case 1285: //Moonriver
-      setbutclr("teal")
-        break;
-      case 66: //OKXChain
-      setbutclr("blue")
-        break;
-    }
+
+
  
     }
     catch(error)
     {
   console.error(error);
+  
+  //setcurrentNetwork("");
+  //setCurrentAccount("");
     }
+   
 };
+login();
+ethereum.on('chainChanged', login);
 
-},[currentAccount]);
 
+},[currentAccount,currentNetwork]);
+console.log("currentAccount",currentAccount);
+//const ch_acc = ethereum.on('chainChanged', login);//ethereum;//'chainChanged'
+//console.log("ch_acc",ch_acc);
 
-  const hanleLogInClick = async () =>{
+  const hanleLogInClick = async (event) =>{
+    event.preventDefault();
+    
     try{
+
       const accounts = await ethereum.request({method: "eth_requestAccounts"});
       setCurrentAccount(accounts[0]);
-      const network = await provider.getNetwork(); 
+      //const chainId = await ethereum.request({ method: 'eth_chainId' });
+      //chainId = ethers.utils.formatUnits(chainId,0);
+      const chainId = await ethereum.request({ method: 'net_version' });
+     // console.log("netw",netw);
+ 
       
+
+      const network = await provider.getNetwork(); 
+      //network2 = ethers.utils.formatEther(network2);
+     
+      console.log("chainId",chainId);
+
+
+
       setcurrentNetwork(network);
-     // console.log("network",network);
-    // console.log("network.chainID", network.chainId);
+
+      switch (network.chainId) {
+ 
+        case 1://eth
+        setbutclr("grey")
+          break;
+        case 4: //rinkeby
+        setbutclr("black")
+          break;
+        case 56: //bnb
+        setbutclr("yellow")
+          break;
+        case 43114: //avax
+        setbutclr("red")
+          break;
+        case 137: //matic
+        setbutclr("purple")
+          break;
+        case 250: //fantom
+        setbutclr("blue")
+          break;
+        case 42161: //arbitrum
+        setbutclr("violet")
+          break;
+        case 10: //optimism
+        setbutclr("red")
+          break;
+        case 1284: //Moonbeam
+        setbutclr("teal")
+          break;
+        case 1285: //Moonriver
+        setbutclr("teal")
+          break;
+        case 66: //OKXChain
+        setbutclr("blue")
+          break;
+      }
+
+      
+     console.log("network.chainID", network.chainId);
 
       }
       catch(error)

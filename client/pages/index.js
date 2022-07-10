@@ -106,6 +106,7 @@ const handApprove = async (event) => {
                  const approve = await try_approve(tokenAddress,toks); 
                  setSuccessMessage("hash: " + approve.response.hash);
                  const Confirmation = await provider.waitForTransaction(approve.response.hash, 1);
+                 setSuccessMessage("Confirmed " + Confirmation.confirmations +" BlockNumber : " + Confirmation.blockNumber);
                  if(Confirmation){setcheckApprove(false);}
                
               }
@@ -115,6 +116,7 @@ const handApprove = async (event) => {
                 const approve = await try_approve(tokenAddress,toks); 
                 setSuccessMessage("hash: " + approve.response.hash);
                 const Confirmation = await provider.waitForTransaction(approve.response.hash, 1);
+                setSuccessMessage("Confirmed " + Confirmation.confirmations +" BlockNumber : " + Confirmation.blockNumber);
                 if(Confirmation){setcheckApprove(true);}
               }
 
@@ -142,7 +144,7 @@ const handleSublit = async (event) => {
 
       setSuccessMessage("hash: " + response.hash);
       const Confirmation = await provider.waitForTransaction(response.hash, 1);
-      //setSuccessMessage("Confirmed" + Confirmation);
+      setSuccessMessage("Confirmed " + Confirmation.confirmations +" BlockNumber : " + Confirmation.blockNumber);
 
       
   }

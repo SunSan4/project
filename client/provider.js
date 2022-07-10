@@ -6,4 +6,5 @@ if(typeof window !== "undefined"  && typeof window.ethereum !== "undefined" ){
 }else{
     provider = new ethers.providers.JsonRpcProvider();
 }
+
 export default provider;
