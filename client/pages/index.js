@@ -157,6 +157,7 @@ const handleSublit = async (event) => {
   return (
   
   <Layout>
+            <div>Button only 4 bnb </div>
             <Button.Group basic vertical>
       <Button color='yellow' onClick={()=>settokenAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")} >BUSD</Button> 
       <Button color='yellow' onClick={()=>settokenAddress("0x55d398326f99059fF775485246999027B3197955")} >USDT</Button> 

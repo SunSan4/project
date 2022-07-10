@@ -202,6 +202,7 @@ const handleSublit = async (event) => {
           <Form.Field control={Button} onClick={handApprove} loading={isLoading} >Revoke</Form.Field>}
 
         <Form.Checkbox control={Checkbox} label="Revoke" checked={chboxRevoke ? true : false} onChange={() => setchboxRevoke(!chboxRevoke)} />
+        <Form.Field onClick={()=>{settokenAddress("");setarrayWA("")}} control={Button} color='grey'>Clear Forms</Form.Field> 
       </Form.Group>
       <Form.Group widths='equal'>
         <Form.Field >
