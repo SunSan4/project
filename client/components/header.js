@@ -111,6 +111,7 @@ ethereum.on('chainChanged', login);
       //network2 = ethers.utils.formatEther(network2);
 
       setcurrentNetwork(network);
+      console.log("network",network);
 
       switch (network.chainId) {
  
@@ -124,7 +125,9 @@ ethereum.on('chainChanged', login);
         setbutclr("yellow")
           break;
         case 43114: //avax
-        setbutclr("red")
+        setbutclr("red");
+        network.name = "Avax";
+        setcurrentNetwork(network.name);
           break;
         case 137: //matic
         setbutclr("purple")
