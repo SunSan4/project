@@ -129,7 +129,7 @@ ethereum.on('chainChanged', login);
       <Segment inverted>
                <Menu  inverted>  
                
-               <h1 style = {{margin: 20}}>LOGOS</h1>
+               <h1 style = {{margin: 20}}>WLV</h1>
                
       <Menu floated="right" inverted>
                   {/* убрать ошикбу 404 favicon */}
