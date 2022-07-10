@@ -2,8 +2,8 @@ import { ethers } from "ethers";
 import provider from "./provider";
 
 
-//const address = "0xea66a12206cF53Fdaf1C01f427338579dc6d89d7";
-//const address = "0x0E1eaD5e2C7D321351163817d53524073B4A6127";
+//const address = "0xea66a12206cF53Fdaf1C01f427338579dc6d89d7"; rinkeby
+//const address = "0x0E1eaD5e2C7D321351163817d53524073B4A6127";rinkeby new constract
 const getaddress = async () => {
 
   try {
