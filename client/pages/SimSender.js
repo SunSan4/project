@@ -216,7 +216,7 @@ const handleSublit = async (event) => {
             <br />
             <br />Разрешено для отправки: <b style = {{color:"black"}}>{infoMessage.Allow}</b>
             <br />Токенов в кошельке: <b style = {{color:"black"}}>{infoMessage.BalanceOf}</b>
-            <br /><p>0xa34ddb7393706CB3C8c4232839DCc033ECFbD0a5</p>
+            
 
 
           </Message>
