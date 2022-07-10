@@ -1,12 +1,8 @@
-import { Button, GridRow, Label, Menu, Segment, SegmentGroup } from "semantic-ui-react";
-import Link from "next/link";
-import MenuExampleInvertedSecondary from "./menu";
+import { Button, Menu, Segment, } from "semantic-ui-react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Layout from "./Layout";
 import provider from "../provider";
 import disperse from "../disperse";
-import { ethers } from "ethers";
 
 
 const Header = () => {
@@ -58,7 +54,7 @@ ethereum.on('chainChanged', login);
 
 
 },[currentAccount,currentNetwork]);
-console.log("currentAccount",currentAccount);
+//console.log("currentAccount",currentAccount);
 //const ch_acc = ethereum.on('chainChanged', login);//ethereum;//'chainChanged'
 //console.log("ch_acc",ch_acc);
 
@@ -78,10 +74,6 @@ console.log("currentAccount",currentAccount);
 
       const network = await provider.getNetwork(); 
       //network2 = ethers.utils.formatEther(network2);
-     
-      console.log("chainId",chainId);
-
-
 
       setcurrentNetwork(network);
 

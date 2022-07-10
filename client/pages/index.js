@@ -47,7 +47,6 @@ const Index = () => {
         setRemaining("");
       }
     }
-    console.log("count array");
   }, [arrayWA]);
 
 
@@ -75,7 +74,7 @@ const Index = () => {
         }
         fetchData();
      }
-     console.log("count tok");
+ 
   }, [tokenAddress,checkApprove]);
 
 
@@ -88,7 +87,6 @@ const Index = () => {
       
     }else{setcheckApprove(true);};
   }
-    console.log("count rem");
   },[ConfirmationList,infoMessage,checkApprove]);
 
 
