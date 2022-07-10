@@ -33,11 +33,46 @@ useEffect(()=>{
     const ownerdisperse = await disperse.owner();
     ownerdisperse = ownerdisperse.toUpperCase();
     setCurrentAccount(accounts[0]);
+    switch (network.chainId) {
+ 
+      case 1://eth
+      setbutclr("grey")
+        break;
+      case 4: //rinkeby
+      setbutclr("black")
+        break;
+      case 56: //bnb
+      setbutclr("yellow")
+        break;
+      case 43114: //avax
+      setbutclr("red")
+        break;
+      case 137: //matic
+      setbutclr("purple")
+        break;
+      case 250: //fantom
+      setbutclr("blue")
+        break;
+      case 42161: //arbitrum
+      setbutclr("violet")
+        break;
+      case 10: //optimism
+      setbutclr("red")
+        break;
+      case 1284: //Moonbeam
+      setbutclr("teal")
+        break;
+      case 1285: //Moonriver
+      setbutclr("teal")
+        break;
+      case 66: //OKXChain
+      setbutclr("blue")
+        break;
+    }
+
     if(currentAccount == ownerdisperse){
     setcurrentOwnerDisperse(true);}
     else{setcurrentOwnerDisperse(false); }
-
-
  
     }
     catch(error)
