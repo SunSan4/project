@@ -11,8 +11,14 @@ const SendList =  (Array) => {
 
     wallets.forEach(w1 => {
             
-        const t1 = w1.replace(/['\t':,]/g," ").split(" ");
+        const t1 = w1.replace(/[\t:,]/g," ");
+        t1 = t1.replace(/ +/g,' ');
+        t1 = t1.split(" ");
+        console.log("t1",t1);
        // console.log("t1",t1);
+       //t1[0] = t1[0].replace(/ +/g, '').trim();
+       //t1[1] = t1[1].replace(/ +/g, '').trim();
+       console.log("t1-0",t1[0]);
         const v1 = utils.parseEther(t1[1]);
         wallet.push(t1[0]);
         value.push(v1.toString());
