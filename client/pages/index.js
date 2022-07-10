@@ -158,9 +158,9 @@ const handleSublit = async (event) => {
   
   <Layout>
             <Button.Group basic vertical>
-      <Button onClick={()=>settokenAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")} >BUSD</Button> 
-      <Button onClick={()=>settokenAddress("0x55d398326f99059fF775485246999027B3197955")} >USDT</Button> 
-      <Button onClick={()=>settokenAddress("0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d")} >USDC</Button> 
+      <Button color='yellow' onClick={()=>settokenAddress("0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56")} >BUSD</Button> 
+      <Button color='yellow' onClick={()=>settokenAddress("0x55d398326f99059fF775485246999027B3197955")} >USDT</Button> 
+      <Button color='yellow' onClick={()=>settokenAddress("0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d")} >USDC</Button> 
     </Button.Group>
 
     {/* <Button.Group>
@@ -205,6 +205,7 @@ const handleSublit = async (event) => {
           <Form.Field control={Button} onClick={handApprove} loading={isLoading} >Revoke</Form.Field>}
 
         <Form.Checkbox control={Checkbox} label="Revoke" checked={chboxRevoke ? true : false} onChange={() => setchboxRevoke(!chboxRevoke)} />
+        <Form.Field onClick={()=>{settokenAddress("");setarrayWA("")}} control={Button} color='grey'>Clear Forms</Form.Field> 
       </Form.Group>
       <Form.Group widths='equal'>
         <Form.Field >
