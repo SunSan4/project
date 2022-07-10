@@ -10,7 +10,6 @@ import provider from "../provider";
 import try_approve from "../utils/try_approve";
 
 
-
 const Index = () => {
   const [checkApprove, setcheckApprove] = useState(true);
   const [tokenAddress, settokenAddress] = useState("");
@@ -158,11 +157,11 @@ const handleSublit = async (event) => {
   return (
   
   <Layout>
-            <div>    <Button.Group basic vertical>
+            <Button.Group basic vertical>
       <Button>BUSD</Button>
       <Button>USDT</Button>
       <Button>USDC</Button>
-    </Button.Group></div>
+    </Button.Group>
 
     {/* <Button.Group>
   
@@ -220,9 +219,7 @@ const handleSublit = async (event) => {
             <br />
             <br />Разрешено для отправки: <b style = {{color:"black"}}>{infoMessage.Allow}</b>
             <br />Токенов в кошельке: <b style = {{color:"black"}}>{infoMessage.BalanceOf}</b>
-            <br /><p>0xa34ddb7393706CB3C8c4232839DCc033ECFbD0a5</p>
-            <br /><p>Disp: </p>
-            <br /><p>0x0E1eaD5e2C7D321351163817d53524073B4A6127</p>
+
 
 
           </Message>
