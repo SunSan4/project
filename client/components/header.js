@@ -146,6 +146,8 @@ ethereum.on('chainChanged', login);
           break;
         case 1285: //Moonriver
         setbutclr("teal")
+        network.name = "Moonriver";
+        setcurrentNetwork(network.name);
           break;
         case 66: //OKXChain
         setbutclr("blue")
