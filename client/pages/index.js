@@ -12,6 +12,7 @@ import { BigNumber, constants, ethers } from "ethers";
 import { formatUnits, parseEther } from "ethers/lib/utils";
 
 
+
 const Index = () => {
   const [checkApprove, setcheckApprove] = useState(true);
   const [tokenAddress, settokenAddress] = useState("");
@@ -21,6 +22,7 @@ const Index = () => {
 
   const singer = provider.getSigner();
   const SenderSinger = disperse.connect(singer);
+  
  // const [, forceRender] = useState({});
 
   // state
@@ -65,13 +67,14 @@ const Index = () => {
       setErrorMessage("");
         const fetchData = async () => {
           try {
-          const resp = await read_checktoken(tokenAddress);
+            
+            const resp = await read_checktoken(tokenAddress);
           setInfoMessage(resp);
         //  console.log("dec", resp.Dec); 
        //   console.log("Tot", resp.TotalSup.toString());
        //   console.log("infoMessage.Allow",infoMessage.Allow);
        //   if(infoMessage.Allow>0){setcheckApprove(false);
-       //     console.log("set>0");
+            
        //   }
          // else{setcheckApprove(true)};
          
@@ -165,6 +168,7 @@ const handleSublit = async (event) => {
   } finally {
     setisLoading(false);
   }
+  
   
 }
 
