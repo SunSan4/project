@@ -17,7 +17,7 @@ useEffect(()=>{
   if(!currentAccount){
     login;
       }
-   ethereum.on('chainChanged', (_chainId) => window.location.reload()); 
+   //ethereum.on('chainChanged', (_chainId) => window.location.reload()); 
   
   
    
@@ -85,7 +85,7 @@ useEffect(()=>{
    
 };
 login();
-ethereum.on('chainChanged', login);
+//ethereum.on('chainChanged', login);
 
 
 },[currentAccount,currentNetwork]);

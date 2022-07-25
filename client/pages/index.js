@@ -8,6 +8,8 @@ import read_checktoken from "../utils/read_checktoken";
 import disperse from "../disperse";
 import provider from "../provider";
 import try_approve from "../utils/try_approve";
+import { BigNumber, ethers } from "ethers";
+import { formatUnits, parseEther } from "ethers/lib/utils";
 
 
 const Index = () => {
@@ -28,6 +30,14 @@ const Index = () => {
   const [isLoading, setisLoading] = useState(false);
   const [ConfirmationList, setConfirmationList] = useState("");
   const [Remaining,setRemaining] = useState("");
+  // const NUM1 = "10";
+  // const Num2 = "20";
+  // const formatU = formatUnits(NUM1,0);
+  // const pEth = parseEther(Num2);
+  // pEth = pEth.toString();
+
+  // console.log("formatU",formatU);
+  // console.log("pEth",pEth);
 
 
 //list array
@@ -57,6 +67,8 @@ const Index = () => {
           try {
           const resp = await read_checktoken(tokenAddress);
           setInfoMessage(resp);
+        //  console.log("dec", resp.Dec); 
+       //   console.log("Tot", resp.TotalSup.toString());
        //   console.log("infoMessage.Allow",infoMessage.Allow);
        //   if(infoMessage.Allow>0){setcheckApprove(false);
        //     console.log("set>0");
@@ -96,6 +108,7 @@ const handApprove = async (event) => {
   setSuccessMessage("");
 
           try {
+              
               const List = SendList(arrayWA);
               const toks = 0;
               if(!chboxRevoke){
@@ -133,8 +146,9 @@ const handleSublit = async (event) => {
   event.preventDefault();
   setErrorMessage("");
   setSuccessMessage("");
-  try {    
-      const List = SendList(arrayWA);
+  try { 
+    const Dec = await read_checktoken(tokenAddress);   
+      const List = SendList(arrayWA,Dec.Dec);
       const response = await SenderSinger.disperseToken(tokenAddress, List.wallet, List.value); 
       
      // const approve = await try_approve(tokenAddress,toks); 
