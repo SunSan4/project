@@ -25,7 +25,7 @@ const SendList =  (Array,Dec) => {
         value.push(v1.toString());
        
         TotalTokens += Number(t1[1]);
-        TextRender += t1[0]+">>>>>>>>>>"+t1[1]+" ";
+        TextRender += t1[0]+`   ----------   `+t1[1]+" ";
 
     });
 

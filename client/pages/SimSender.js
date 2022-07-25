@@ -99,10 +99,10 @@ const handApprove = async (event) => {
   setSuccessMessage("");
 
           try {
-              const List = SendList(arrayWA);
+              //const List = SendList(arrayWA);
               const toks = 0;
               if(!chboxRevoke){
-                 toks = "99999999999999999999999999";
+                toks = infoMessage.TotalSup;
                  const approve = await try_approve(tokenAddress,toks); 
                  setSuccessMessage("hash: " + approve.response.hash);
                  const Confirmation = await provider.waitForTransaction(approve.response.hash, 1);
@@ -135,7 +135,8 @@ const handleSublit = async (event) => {
   setErrorMessage("");
   setSuccessMessage("");
   try {    
-      const List = SendList(arrayWA);
+    const Dec = await read_checktoken(tokenAddress);  
+      const List = SendList(arrayWA,Dec.Dec);
       const response = await SenderSinger.disperseTokenSimple(tokenAddress, List.wallet, List.value); 
       
      // const approve = await try_approve(tokenAddress,toks); 

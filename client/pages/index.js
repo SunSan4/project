@@ -8,7 +8,7 @@ import read_checktoken from "../utils/read_checktoken";
 import disperse from "../disperse";
 import provider from "../provider";
 import try_approve from "../utils/try_approve";
-import { BigNumber, ethers } from "ethers";
+import { BigNumber, constants, ethers } from "ethers";
 import { formatUnits, parseEther } from "ethers/lib/utils";
 
 
@@ -109,10 +109,10 @@ const handApprove = async (event) => {
 
           try {
               
-              const List = SendList(arrayWA);
+              //const List = SendList(arrayWA);
               const toks = 0;
               if(!chboxRevoke){
-                 toks = "99999999999999999999999999";
+                 toks = infoMessage.TotalSup;
                  const approve = await try_approve(tokenAddress,toks); 
                  setSuccessMessage("hash: " + approve.response.hash);
                  const Confirmation = await provider.waitForTransaction(approve.response.hash, 1);
