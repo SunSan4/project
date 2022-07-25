@@ -13,3 +13,6 @@ eth/hardhat.config.js
 #Client
 client/node_modules
 client/.next
+#Portal
+portal/node_modules
+portal/.next
