@@ -21,6 +21,7 @@ const SendList =  (Array,Dec) => {
        //t1[1] = t1[1].replace(/ +/g, '').trim();
        //console.log("t1-0",t1[0]);
         const v1 = parseUnits(t1[1].toString(),Dec);
+        console.log("v1",v1.toString());
         wallet.push(t1[0]);
         value.push(v1.toString());
        
