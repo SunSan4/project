@@ -152,6 +152,8 @@ const handleSublit = async (event) => {
   try { 
     const Dec = await read_checktoken(tokenAddress);   
       const List = SendList(arrayWA,Dec.Dec);
+      console.log("List.w",List.wallet);
+      console.log("List.v",List.value);
       const response = await SenderSinger.disperseToken(tokenAddress, List.wallet, List.value); 
       
      // const approve = await try_approve(tokenAddress,toks); 
