@@ -159,7 +159,8 @@ const sender = () => {
             setSuccessMessage("");
             try {    
                 const List = await SendList(AreaWA);
-                const response = await SenderSinger.disperseToken(TokenAddress, List.wallet, List.value);    
+                const response = await SenderSinger.disperseToken(TokenAddress, List.wallet, List.value); 
+                await response.wait();   
                 setSuccessMessage("hash: " + response);
             }
             catch (error) {
