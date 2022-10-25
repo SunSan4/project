@@ -32,6 +32,7 @@ const Index = () => {
   const [isLoading, setisLoading] = useState(false);
   const [ConfirmationList, setConfirmationList] = useState("");
   const [Remaining,setRemaining] = useState("");
+  const [Updater,setUpdater] = useState(false);
   // const NUM1 = "10";
   // const Num2 = "20";
   // const formatU = formatUnits(NUM1,0);
@@ -89,7 +90,7 @@ const Index = () => {
         fetchData();
      }
  
-  }, [tokenAddress,checkApprove]);
+  }, [tokenAddress,checkApprove,Updater]);
 
 
 // take remaining
@@ -228,6 +229,7 @@ const handleSublit = async (event) => {
 
         <Form.Checkbox control={Checkbox} label="Revoke" checked={chboxRevoke ? true : false} onChange={() => setchboxRevoke(!chboxRevoke)} />
         <Form.Field onClick={()=>{settokenAddress("");setarrayWA("");setInfoMessage("");setConfirmationList("");setRemaining()}} control={Button} color='grey'>Clear Forms</Form.Field> 
+        <Form.Field onClick={()=>{setUpdater(true)}} control={Button} color='grey'>UpDATE</Form.Field>
       </Form.Group>
       <Form.Group widths='equal'>
         <Form.Field >
