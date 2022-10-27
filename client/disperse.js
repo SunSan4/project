@@ -9,7 +9,7 @@ const getaddress = async () => {
   try {
     const addy = "";
     const network = await provider.getNetwork();
-   // console.log("network.chainID", network.chainId);
+    //console.log("network.chainID", network.chainId);
     switch (network.chainId) {
 
       case 1://eth
@@ -44,6 +44,9 @@ const getaddress = async () => {
         break;
       case 66: //OKXChain
         addy = ""
+        break;
+      case 5: //Goerly
+        addy = "0x2737E352B8dc154483Bd3e9Ab128B68F029B436B"
         break;
     }
 

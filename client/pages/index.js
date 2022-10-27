@@ -61,7 +61,7 @@ const Index = () => {
     }
   }, [arrayWA]);
 
-
+console.log("updater",Updater);
 //info token
   useEffect(() => {
     if (tokenAddress != "") {
@@ -79,6 +79,7 @@ const Index = () => {
        //   }
          // else{setcheckApprove(true)};
          
+         
         }
 
           catch (error) {
@@ -88,6 +89,7 @@ const Index = () => {
           }
         }
         fetchData();
+        setUpdater(false);
      }
  
   }, [tokenAddress,checkApprove,Updater]);
