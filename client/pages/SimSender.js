@@ -130,6 +130,27 @@ const handApprove = async (event) => {
 }
 
   //send dispers
+  const handleSublETH = async (event) => {
+    event.preventDefault();
+    setErrorMessage("");
+    setSuccessMessage("");
+    try{
+      //const Dec = await read_checktoken(tokenAddress);  
+      const List = SendList(arrayWA,1);
+      const response = await SenderSinger.disperseEther(List.wallet, List.value); 
+      
+     // const approve = await try_approve(tokenAddress,toks); 
+
+      setSuccessMessage("hash: " + response.hash);
+      const Confirmation = await provider.waitForTransaction(response.hash, 1);
+      console.log("confirm",Confirmation);
+    }
+    catch (error) {
+      console.error(error);
+      setErrorMessage(error.message);
+  } finally {
+    setisLoading(false);
+  }
 const handleSublit = async (event) => {
   event.preventDefault();
   setErrorMessage("");
@@ -196,6 +217,7 @@ const handleSublit = async (event) => {
 
 
       <Form.Group >
+      <Form.Field control={Button} onClick={handleSublETH} loading={isLoading} disabled>SendTOKEN-N</Form.Field>
       {!checkApprove?<Form.Field control={Button} onClick={handleSublit} loading={isLoading} >Send</Form.Field>:
       <Form.Field control={Button} onClick={handleSublit} loading={isLoading} disabled>Send</Form.Field>}
 
