@@ -136,7 +136,7 @@ const handApprove = async (event) => {
     setSuccessMessage("");
     try{
       //const Dec = await read_checktoken(tokenAddress);  
-      const List = SendList(arrayWA,1);
+      const List = SendList(arrayWA,18);
       const response = await SenderSinger.disperseEther(List.wallet, List.value); 
       
      // const approve = await try_approve(tokenAddress,toks); 
