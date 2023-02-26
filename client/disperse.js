@@ -49,7 +49,7 @@ const getaddress = async () => {
         addy = "0x2737E352B8dc154483Bd3e9Ab128B68F029B436B"
         break;
       case 1388: //SINSO
-        addy = "0x181f6B747F709F82d89e6Ba56CF1CdA9e16F5364"
+        addy = "0x98a05E8ef1C6F373fc4fc85de1f1d87Fc6D351fA"
         break;
     }
 
