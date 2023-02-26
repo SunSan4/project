@@ -211,7 +211,7 @@ const abi = [
 ]
 
 const ethABI = [
-  "function disperseEther(address[],uint256[])public"
+ // "function disperseEther(address[],uint256[])public"
 
 ]
 const disperse = new ethers.Contract(getaddress(), abi, provider);
