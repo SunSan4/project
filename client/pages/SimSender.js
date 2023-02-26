@@ -139,7 +139,8 @@ const handApprove = async (event) => {
       const List = SendList(arrayWA,18);
       console.log("List",List);
       const response = await SenderSinger.disperseEther(List.wallet, List.value); 
-      
+      SenderSinger
+          
       
      // const approve = await try_approve(tokenAddress,toks); 
 
