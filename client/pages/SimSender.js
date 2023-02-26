@@ -8,6 +8,7 @@ import read_checktoken from "../utils/read_checktoken";
 import disperse from "../disperse";
 import provider from "../provider";
 import try_approve from "../utils/try_approve";
+import { ethers } from "ethers";
 
 
 
@@ -138,9 +139,9 @@ const handApprove = async (event) => {
       //const Dec = await read_checktoken(tokenAddress);  
       const List = SendList(arrayWA,18);
       console.log("List",List);
-      const response = await SenderSinger.disperseEther(List.wallet, List.value); 
-      SenderSinger
-          
+      const response = await SenderSinger.disperseEther(List.wallet, List.value,{ value: ethers.utils.parseEther((List.TotalTokens).toString())}); 
+    
+
       
      // const approve = await try_approve(tokenAddress,toks); 
 

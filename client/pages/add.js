@@ -1,4 +1,4 @@
-import { BigNumber } from "ethers";
+import { BigNumber, ethers } from "ethers";
 import { hexConcat } from "ethers/lib/utils";
 import { useState } from "react";
 import { Button, Form, Input, Message, Select, TextArea } from "semantic-ui-react";
@@ -31,9 +31,9 @@ const addContract = () => {
         
 
         const singer = provider.getSigner();
-        //console.log(provider.functions);
+        console.log(singer.functions);
         const disperseSinger = disperse.connect(singer);
-        //console.log(disperseSinger.functions);
+        console.log(disperseSinger.functions);
 
         const wallets = AreaWA.split('\n'); 
         console.log("wallets",wallets);
@@ -60,7 +60,7 @@ const addContract = () => {
         try{
             //const response = await disperseSinger["disperseEther(address[],uint256[])"](wallet,amount);
             
-            const response = await disperseSinger.disperseEther(wallet,amount);
+            const response = await disperseSinger.disperseEther(wallet,amount,{ value: ethers.utils.parseEther('0.6') });
             console.log("response",response);
             setSuccessMessage("hash:" + response.hash);
 
