@@ -155,6 +155,11 @@ login();
         case 5: //Groerly
           setbutclr("black")
           break;
+        case 1388: //AmStar
+        setbutclr("blue")
+          network.name = "AmStar-SINSO";
+          setcurrentNetwork(network.name);
+          break;
       }
 
       

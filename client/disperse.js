@@ -48,7 +48,7 @@ const getaddress = async () => {
       case 5: //Goerly
         addy = "0x2737E352B8dc154483Bd3e9Ab128B68F029B436B"
         break;
-      case 1388: //SINSO
+      case 1388: //AmStar(SINSO)
         addy = "0x0cd1DCA87166307fdBE5d83057788b6aDB77B4c1"
         break;
     }
