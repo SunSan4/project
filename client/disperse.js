@@ -31,7 +31,7 @@ const getaddress = async () => {
         addy = ""
         break;
       case 42161: //arbitrum
-        addy = ""
+        addy = "0x181f6B747F709F82d89e6Ba56CF1CdA9e16F5364"
         break;
       case 10: //optimism
         addy = ""
