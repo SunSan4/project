@@ -12,7 +12,7 @@ const getaddress = async () => {
     //console.log("network.chainID", network.chainId);
     switch (network.chainId) {
 
-      case 1://eth
+      case 1://eth 
         addy = "0xB2BbA1701110dca7eC810C56679Da3736Cae3B30"
         break;
       case 4: //rinkeby
