@@ -68,6 +68,9 @@ useEffect(()=>{
       case 66: //OKXChain
       setbutclr("blue")
         break;
+      case 185: //mint
+      setbutclr("green")
+        break;
     }
 
     if(currentAccount == ownerdisperse){
