@@ -51,7 +51,7 @@ const getaddress = async () => {
       case 1388: //AmStar(SINSO)
         addy = "0x0cd1DCA87166307fdBE5d83057788b6aDB77B4c1"
         break;
-      case 185: //AmStar(SINSO)
+      case 185: //mint
         addy = "0x181f6B747F709F82d89e6Ba56CF1CdA9e16F5364"
         break;
     }
