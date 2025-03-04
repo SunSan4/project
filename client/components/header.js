@@ -163,6 +163,11 @@ login();
           network.name = "AmStar-SINSO";
           setcurrentNetwork(network.name);
           break;
+        case 185: //AmStar
+        setbutclr("green")
+          network.name = "MINT";
+          setcurrentNetwork(network.name);
+          break;
       }
 
       
