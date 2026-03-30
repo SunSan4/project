@@ -71,6 +71,9 @@ useEffect(()=>{
       case 185: //mint
       setbutclr("green")
         break;
+      case 43419: //gunz
+      setbutclr("blue")
+        break;
     }
 
     if(currentAccount == ownerdisperse){
