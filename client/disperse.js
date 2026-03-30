@@ -54,6 +54,9 @@ const getaddress = async () => {
       case 185: //mint
         addy = "0x181f6B747F709F82d89e6Ba56CF1CdA9e16F5364"
         break;
+      case 43419: //gunz
+        addy = "0x181f6B747F709F82d89e6Ba56CF1CdA9e16F5364"
+        break;
     }
 
     return addy
